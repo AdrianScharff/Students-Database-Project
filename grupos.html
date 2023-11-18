@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Groups</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg pt-0">
+        <div class="col-12">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav col-12">
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 active text-center" aria-current="page" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./alumnos.html">Alumnos</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./agregarAlumno.html">Agregar alumno</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./grupos.html">Grupos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="group-home-section d-flex justify-content-center">
+        <section class="col-5 mt-3">
+            <p class="fs-1">Grupos</p>
+            <div class="overflow-auto">
+                <table class="table table-bordered mb-0 fs-3">
+                    <thead>
+                        <tr>
+                            <th class="col-4 text-center">Nombre</th>
+                            <th class="col-4 text-center">Promedio</th>
+                            <th class="col-4 text-center">Alumnos</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="overflow-auto" style="max-height: 480px;">
+                <table class="table table-bordered fs-3">
+                    <tbody class="groups-container">
+                        <!-- <div>
+                            <tr>
+                                <td class="col-4 text-center">1A</td>
+                                <td class="col-4 text-center">
+                                    9.9
+                                </td>
+                                <td class="d-flex flex-column align-items-center gap-1">
+                                    <button class="btn btn-primary fs-4 col-11">Ver alumnos</button>
+                                    <button class="btn btn-primary fs-4 col-11">Agregar alumnos</button>
+                                </td>
+                            </tr>
+                        </div> -->
+                    </tbody>
+                </table>
+            </div>
+            <button class="add-group-button btn btn-primary fs-2 mt-3">Agregar grupo</button>
+        </section>
+    </section>
+
+    <section
+        class="see-student-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="col-6 p-5 bg-light position-relative">
+            <i class="bi bi-x-lg close close-display-students fs-3 position-absolute"></i>
+            <div class="mb-3">
+                <span class="bg-primary-subtle fs-2 fw-semibold px-4">Grupo <span>1A</span>:</span>
+            </div>
+            <ol class="display-students-container list-unstyled height-overflow overflow-auto fs-3 mb-0" start="1">
+                <div class="d-flex">
+                    <p class="col-8 fs-3 fw-bold">Nombre</p>
+                    <p class="col-4 fs-3 fw-bold">Promedio</p>
+                </div>
+                <li class="d-flex">
+                    <p class="col-8">1. <span>Michael Jackson Jimenez</span></p>
+                    <span class="col-4">9.9</span>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section
+        class="add-students-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light position-relative">
+            <i class="bi bi-x-lg close close-add-students fs-3 position-absolute"></i>
+            <div class="mb-3">
+                <p class="fs-3 fw-semibold">Elige al alumno que deseas agregar</p>
+            </div>
+            <ol class="add-students-container list-unstyled height-overflow overflow-auto fs-3 mb-0 d-flex flex-column gap-3"
+                start="1">
+                <!-- <li>
+                    <button class="col-12 text-start btn btn-outline-primary fs-4"><span>1. </span>Michael Jackson
+                        Jimenez</button>
+                </li> -->
+            </ol>
+        </div>
+    </section>
+
+    <section class="student-included-alert d-none d-flex justify-content-center align-items-center position-absolute"
+        style="width: 100vw; height: 100vh; top: 0;">
+        <div class="d-flex border border-danger border-3 rounded-4 flex-column align-items-center bg-light fs-1 p-3"
+            style="width: 615px;">
+            <div class="text-center">
+                Este alumno ya está en el grupo
+            </div>
+        </div>
+    </section>
+
+    <section class="student-added-success d-none d-flex justify-content-center align-items-center position-absolute"
+        style="width: 100vw; height: 100vh; top: 0;">
+        <div class="d-flex border border-success border-3 rounded-4 flex-column align-items-center bg-light fs-1 p-3"
+            style="width: 615px;">
+            <div class="text-center">
+                Alumno agregado ✓
+            </div>
+        </div>
+    </section>
+
+
+    <section class="d-none add-group-section popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-2 position-relative">
+            <i class="bi bi-x-lg close close-add-group fs-3 position-absolute"></i>
+            <div class="mb-5 fw-semibold">
+                Agregar grupo
+            </div>
+            <form class="add-group-form" style="width: 274px;">
+                <p>Nombre del nuevo grupo</p>
+                <input type="text" class="col-12 add-group-input mb-4">
+                <button class="btn fs-3 btn-success d-block" type="submit">Agregar</button>
+            </form>
+        </div>
+    </section>
+
+    <section
+        class="group-added-success d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 d-flex flex-column align-items-center bg-light fs-1">
+            <div class="text-center mb-5">
+                Grupo agregado con éxito<br>✔
+            </div>
+            <button class="close-group-added-success btn btn-primary">Entendido</button>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="./app3.js"></script>
+</body>
+
+</html>

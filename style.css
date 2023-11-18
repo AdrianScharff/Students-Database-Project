@@ -1,0 +1,49 @@
+.title {
+    font-size: 4rem;
+    margin-top: 5rem;
+}
+
+.popUp {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.539);
+    backdrop-filter: blur(8px);
+}
+
+.close {
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.subjects {
+    height: 200px;
+}
+
+.inpCalif {
+    height: 50px;
+    width: 80px;
+}
+
+.height-overflow {
+    height: 400px;
+}
+
+.show-alert {
+    animation: fadeInOut 2s ease-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 1 }
+    50% { opacity: 1 }
+    80% { opacity: 0.8 }
+    80% { opacity: 0.5 }
+    100% { opacity: 0 }
+}
+
+@media screen and (max-width: 780px) {
+    .title {
+        font-size: 50px;
+    }
+}

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Students Database</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg pt-0">
+        <div class="col-12">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav col-12">
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 active text-center" aria-current="page" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./alumnos.html">Alumnos</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./agregarAlumno.html">Agregar alumno</a>
+                    </li>
+                    <li class="nav-item col-3 border border-dark bg-primary-subtle">
+                        <a class="nav-link fs-1 text-center" href="./grupos.html">Grupos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="p-5">
+        <section>
+            <p class="fs-1 fw-semibold">Alumnos</p>
+        </section>
+        <section class="search-and-sorting-section">
+            <section class="d-flex gap-3">
+                <div class="fs-3">Buscar alumno por:</div>
+                <div class="search-section d-flex flex-column gap-2">
+                    <div>
+                        <button type="button" class="nombre-button btn btn-primary">Nombre</button>
+                        <button type="button" class="apellidos-button btn btn-primary">Apellidos</button>
+                        <button type="button" class="materia-button btn btn-primary">Materia</button>
+                    </div>
+                    <form class="d-none name-search-form search-form d-flex gap-2">
+                        <input type="text" class="name-search-input form-control" placeholder="Nombre">
+                        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    </form>
+                    <form class="d-none last-name-search-form search-form d-flex gap-2">
+                        <input type="text" class="last-name-search-input form-control" placeholder="Apellidos">
+                        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    </form>
+                    <form class="d-none subject-search-form search-form d-flex gap-2">
+                        <input type="text" class="subject-search-input form-control" placeholder="Materia">
+                        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    </form>
+                    <div class="d-none name-not-found-alert show-alert alert alert-danger">Nombre de alumno no encontrado</div>
+                    <div class="d-none last-name-not-found-alert show-alert alert alert-danger">Apellido de alumno no encontrado</div>
+                    <div class="d-none subject-not-found-alert show-alert alert alert-danger">Materia no encontrada</div>
+                </div>
+            </section>
+            <section class="order-buttons-section d-flex gap-3 mt-3">
+                <div class="fs-3">Ordenar por:</div>
+                <button type="button" class="seniority-order-button order-button btn btn-primary">Antiguedad</button>
+                <div class="fs-3">Por promedio:</div>
+                <button type="button" class="ascending-order-button order-button btn btn-primary">Orden ascendente</button>
+                <button type="button" class="descending-order-button order-button btn btn-primary">Orden descendente</button>
+            </section>
+        </section>
+
+        <table class="table table-bordered mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Alumno</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Materias inscritas</th>
+                    <th scope="col">Calificaciones</th>
+                    <th scope="col">Promedio</th>
+                </tr>
+            </thead>
+            <tbody class="students-table">
+                <!-- <tr>
+                    <th>1</th>
+                    <td>Michael Jackson Perez</td>
+                    <td>23</td>
+                    <td>
+                        <button class="btn btn-primary">Ver materias</button>
+                        <button class="btn btn-primary">Agregar materia</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Ver calificaciones</button>
+                        <button class="btn btn-primary">Agregar calificaciones</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info">Obtener promedio</button>
+                    </td>
+                </tr> -->
+                <!-- <tr>
+                    <th>2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>
+                        <button class="btn btn-primary">Ver materias</button>
+                        <button class="btn btn-primary">Agregar materia</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Ver calificaciones</button>
+                        <button class="btn btn-primary">Agregar calificaciones</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info">Obtener promedio</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>
+                        <button class="btn btn-primary">Ver materias</button>
+                        <button class="btn btn-primary">Agregar materia</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Ver calificaciones</button>
+                        <button class="btn btn-primary">Agregar calificaciones</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info">Obtener promedio</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>
+                        <button class="btn btn-primary">Ver materias</button>
+                        <button class="btn btn-primary">Agregar materia</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Ver calificaciones</button>
+                        <button class="btn btn-primary">Agregar calificaciones</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info">Obtener promedio</button>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </section>
+
+    <section
+        class="see-subjects-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-1 position-relative">
+            <i class="bi bi-x-lg close close-subjects-btn fs-3 position-absolute"></i>
+            <div class="mb-4">
+                Materias inscritas:
+            </div>
+            <ul class="subjects-container height-overflow overflow-auto mb-0">
+                <!-- <li>Matematicas</li> -->
+                <!-- <li>Espanol</li>
+                <li>Biologia</li>
+                <li>Geografia</li>
+                <li>Computacion</li>
+                <li>Ingles</li> -->
+            </ul>
+        </div>
+    </section>
+    <section
+        class="add-subject-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-1 position-relative">
+            <i class="bi bi-x-lg close close-add-subject fs-3 position-absolute"></i>
+            <div>
+                Elige la materia que deseas agregar:
+            </div>
+            <ul class="subjects list-unstyled d-flex flex-column flex-wrap mb-0">
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Matematicas</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Espanol</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Quimica</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Cine</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Ingles</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Biologia</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Cultura</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Programacion</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Historia</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Ciencias sociales</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Computacion</button>
+                </li>
+                <li>
+                    <button class="subject-to-add-btn btn btn-outline-dark">Logica</button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section
+        class="subject-added-success d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-1 d-flex flex-column align-items-center position-relative">
+            <p class="text-center">
+                Materia agregada con éxito <br> ✔
+            </p>
+            <button class="dismiss-subject-added mt-5 btn btn-primary">Entendido</button>
+        </div>
+    </section>
+    <section class="see-grades-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-1 position-relative">
+            <i class="bi bi-x-lg close close-grades-btn fs-3 position-absolute"></i>
+            <div class="mb-3">
+                Calificaciones
+            </div>
+            <ul class="grades-container height-overflow overflow-auto list-unstyled fs-2 mb-0">
+                <!-- <li class="d-flex justify-content-between">Matematicas: <span class="ms-5 pe-4 text-primary">7</span></li> -->
+                <!-- <li class="d-flex justify-content-between">Espanol: <span class="ms-5 pe-4 text-primary">9</span></li>
+                <li class="d-flex justify-content-between">Biologia: <span class="ms-5 pe-4 text-primary">9</span></li>
+                <li class="d-flex justify-content-between">Geografia: <span class="ms-5 pe-4 text-primary">8</span></li>
+                <li class="d-flex justify-content-between">Computacion: <span class="ms-5 pe-4 text-primary">10</span></li>
+                <li class="d-flex justify-content-between">Ingles: <span class="ms-5 pe-4 text-primary">7</span></li>
+                <li class="d-flex justify-content-between">Matematicas: <span class="ms-5 pe-4 text-primary">7</span></li>
+                <li class="d-flex justify-content-between">Espanol: <span class="ms-5 pe-4 text-primary">9</span></li>
+                <li class="d-flex justify-content-between">Biologia: <span class="ms-5 pe-4 text-primary">9</span></li>
+                <li class="d-flex justify-content-between">Geografia: <span class="ms-5 pe-4 text-primary">8</span></li>
+                <li class="d-flex justify-content-between">Computacion: <span class="ms-5 pe-4 text-primary">10</span></li>
+                <li class="d-flex justify-content-between">Ingles: <span class="ms-5 pe-4 text-primary">7</span></li> -->
+            </ul>
+        </div>
+    </section>
+    <section
+        class="assign-grades-section d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 bg-light fs-1 d-flex flex-column align-items-center position-relative">
+            <i class="bi bi-x-lg close close-assign-grades fs-3 position-absolute"></i>
+            <div class="mb-5">
+                Asignar calificaciones
+            </div>
+            <form class="assign-grades-form col-12 d-flex flex-column align-items-center">
+                <ul class="grades-inputs-container height-overflow overflow-auto col-12 list-unstyled fs-2 mb-3 pe-3">
+                    <!-- <li class="d-flex justify-content-between">
+                        <p class="me-5">Matematicas</p>
+                        <input class="ms-5 inpCalif" type="text">
+                    </li> -->
+                    <!-- <li class="d-flex justify-content-between">
+                        <p class="me-5">Espanol</p>
+                        <input class="ms-5 inpCalif" type="text">
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <p class="me-5">Biologia</p>
+                        <input class="ms-5 inpCalif" type="text">
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <p class="me-5">Computacion</p>
+                        <input class="ms-5 inpCalif" type="text">
+                    </li>
+                    <li class="d-flex justify-content-between mb-0 pb-0">
+                        <p class="me-5">Ingles</p>
+                        <input class="ms-5 inpCalif mb-0 pb-0" type="text">
+                    </li>
+                    <li class="d-flex justify-content-between mb-0 pb-0">
+                        <p class="me-5">Geografia</p>
+                        <input class="ms-5 inpCalif mb-0 pb-0" type="text">
+                    </li> -->
+                </ul>
+                <button class="mx-auto btn btn-success" type="submit">Asignar</button>
+            </form>
+        </div>
+    </section>
+    <section
+        class="grades-added-success d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 d-flex flex-column align-items-center bg-light fs-1">
+            <div class="text-center mb-5">
+                Calificaciones asignadas con éxito<br>✔
+            </div>
+            <button class="btn dismiss-grades-added btn-primary">Entendido</button>
+        </div>
+    </section>
+    <section class="d-none popUp d-flex justify-content-center align-items-center position-absolute">
+        <div class="p-5 col-3 rounded d-flex flex-column align-items-center bg-light fs-1">
+            <p class="text-center">El promedio de <span>Juan Ernesto Perez Jimenez</span> es:</p>
+            <p class="bg-success p-2 rounded-4 text-light mb-5">8.98</p>
+            <button class="btn btn-primary mt-5">Entendido</button>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

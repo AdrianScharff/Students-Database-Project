@@ -1,0 +1,55 @@
+Crear funcion que recorra el array alumnos para generar un nuevo lugar en la tabla de alumnos por cada alumno contenido en el array alumnos.
+
+Voy a tener un array alumnos con objetos alumno, este va a estar almacenado en Local Storage
+    Cuando agregue un nuevo alumno por medio del formulario
+        Voy a crear un nuevo objeto alumno con nombre, apellidos y edad, materias y calificaciones van a ser null
+        este objeto lo voy a empujar al array alumnos, tanto en mi documento como en local storage
+-----------------------------------------------
+Voy a tener una lista de grupos que será parte del array grupos
+-----------------------------------------------
+Para que se actualice el promedio cada que agrego una nueva materia y calificacion:
+
+Primero crear una funcion getGPA que recibe 2 argumentos: IdDeestudiante y arrayDeEstudiantes, el primero es para saber de que estudiante queremos sacar el promedio y el segundo es para saber cual array de estudiantes vamos a editar y resubir a local storage. Tambien puede ser que reciba solo el primer argumento y obtenga el array de estudiantes directamente de local storage. Lo que queremos es obtener el array que ha sido empujado a local storage la ultima vez que se ejecuto un submit en el formulario de agregar calificacion. Esta funcion va a ser llamada cada vez que se agrega una o mas nuevas calificaciones al local storage, es decir dentro de la funcion doWhenSubmittingAssignGradesForm
+    let counter = 0
+    let sum = 0
+    itera por todas las propiedades calificacion de propiedad materias de estudiante
+        si hay calificacion
+            counter ++
+            sum += calificacion
+    const GPA = sum / counter
+    return GPA
+
+funcion updateGPA(studentId, GPA) para actualizar el promedio en local storage y llamar funcion displayStudent para actualizar promedio en el documento
+    obtiene el array de local storage
+    encuentra al estudiante con id studentId
+
+    actualiza la propiedad promedio de este estudiante
+    Sube al array de nuevo a local storage
+    llama la funcion displaystudents para actualizar el render con el nuevo promedio
+
+-------------------------------------------------------------------------------------------
+Funcion getStudentsBySearch()
+    Get the array from local storage
+    variable student that uses the find method to find the student that matches the first letters of the sought student
+    si se encuentra el estudiante
+        despliega el row con la informacion del estudiante
+    Si no se encuentra
+        despliega la tabla vacia
+        despliega el aviso de estudiante no encontrado
+
+Quiero que la busqueda pueda tener resultados si:
+Nombre
+El nombre ingresado coincide con las primeras letras del nombre o la palabra completa
+
+Apellidos
+Si es una palabra
+Que la palabra ingresada coincida con las primeras letras de la primera palabra del apellido o con las primeras letras de la segunda letra del apellido
+Si son dos palabras
+Que la primera palabra coincida con el primer apellido y 
+    Si el apelido tiene dos palabras, que las primeras letras de la segunda palabra coincidan con las primeras letras del segundo apellido
+
+-----------------------------------------------------------------------------------------------------------------------
+
+funcion que al dar clic a agregar grupo
+crea un nuevo grupo
+agrega el nuevo grupo a local storage
