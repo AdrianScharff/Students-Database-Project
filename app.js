@@ -155,6 +155,11 @@ const addSubjectClickedToLocalStorage = (idOfButton, materiaName) => {
         if (!subjectFound) {
             const newSubject = new Materia(materiaName);
             student.materias.push(newSubject);
+            const groupOfStudent = loggedStudentsObject.grupos.find(g => g.alumnos.some(s => s.id === student.id));
+            if (groupOfStudent) {
+                const studentSoughtInGroup = groupOfStudent.alumnos.find(s => s.id === student.id);
+                studentSoughtInGroup.materias = student.materias;
+            }
             localStorage.setItem('loggedStudents', JSON.stringify(loggedStudentsObject));
             showPopUp(subjectAddedPopUp);
         }
@@ -238,6 +243,7 @@ assignGradesForm.addEventListener('submit', e => {
 const doWhenSubmittingAssignGradesForm = (student, arrayOfStudents) => {
     const gradeInputs = document.querySelectorAll('.inpCalif');
     if (gradeInputs.length > 0 && [...gradeInputs].some(inp => inp.value)) {
+        const loggedStudentsObject = JSON.parse(localStorage.getItem('loggedStudents'));
         let subjectObjectFound = true;
         gradeInputs.forEach(input => {
             if (input.value) {
@@ -245,16 +251,17 @@ const doWhenSubmittingAssignGradesForm = (student, arrayOfStudents) => {
                 const subjectToChangeGrade = student.materias.find(m => m.materia === inputSubject);
                 if (subjectToChangeGrade) {
                     subjectToChangeGrade.calificacion = input.value;
+                    const groupOfStudent = loggedStudentsObject.grupos.find(g => g.alumnos.some(s => s.id === student.id));
+                    if (groupOfStudent) {
+                        const studentSoughtInGroup = groupOfStudent.alumnos.find(s => s.id === student.id);
+                        const subjectSoughtInStudent = studentSoughtInGroup.materias.find(m => m.materia === subjectToChangeGrade.materia);
+                        subjectSoughtInStudent.calificacion = subjectToChangeGrade.calificacion;
+                    }
                 } else {
-                    console.log('The object in the array materias with the materia property value === dataset id of the input submitted was not found, the array materias is this:');
-                    console.log(student.materias);
-                    console.log('and the dataset id of the input submitted is this:');
-                    console.log(inputSubject);
                     subjectObjectFound = false;
                 }
             }
         });
-        const loggedStudentsObject = JSON.parse(localStorage.getItem('loggedStudents'));
         loggedStudentsObject.todos = arrayOfStudents;
         localStorage.setItem('loggedStudents', JSON.stringify(loggedStudentsObject));
         if (subjectObjectFound) {
@@ -263,7 +270,6 @@ const doWhenSubmittingAssignGradesForm = (student, arrayOfStudents) => {
             updateGPA(student, arrayOfStudents, getGPA(student));
         }
     }
-    console.log('doWhenSubmittingAssignGradesForm triggered!!');
 }
 
 const displayGrades = (btnId) => {
@@ -298,9 +304,14 @@ const getGPA = (studentObject) => {
 }
 
 const updateGPA = (studentObject, studentsArray, GPA) => {
-    studentObject.promedio = GPA;
     const loggedStudentsObject = JSON.parse(localStorage.getItem('loggedStudents'));
+    studentObject.promedio = GPA;
     loggedStudentsObject.todos = studentsArray;
+    const groupOfStudent = loggedStudentsObject.grupos.find(g => g.alumnos.some(s => s.id === studentObject.id));
+    if (groupOfStudent) {
+        const studentInGroup = groupOfStudent.alumnos.find(s => s.id === studentObject.id);
+        studentInGroup.promedio = studentObject.promedio;
+    }
     localStorage.setItem('loggedStudents', JSON.stringify(loggedStudentsObject));
     if (seniorityOrderButton.classList.contains('btn-info')) {
         displayAllStudents();
@@ -424,9 +435,9 @@ const showEmptySubjectAlert = (...args) => {
     } else {
         htmlToAppend = `<div class='show-alert alert alert-danger'>Alumnos no encontrados para materias `;
         for (let i = 0; i < args.length; i++) {
-            if (args[i] === args[args.length -2]) {
+            if (args[i] === args[args.length - 2]) {
                 htmlToAppend += `${args[i]} o `;
-            } else if (args[i] === args[args.length -1]) {
+            } else if (args[i] === args[args.length - 1]) {
                 htmlToAppend += `${args[i]}</div>`;
             } else {
                 htmlToAppend += `${args[i]}, `;

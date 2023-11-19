@@ -60,6 +60,7 @@ const addStudentsSection = document.querySelector('.add-students-section');
 const studentsToAddContainer = document.querySelector('.add-students-container');
 const studentAddedSection = document.querySelector('.student-added-success');
 const studentIncludedAlert = document.querySelector('.student-included-alert');
+const studentOtherGroupAlert = document.querySelector('.student-other-group-alert');
 const studentsOfGroupContainer = document.querySelector('.display-students-container');
 
 // Forms
@@ -152,15 +153,16 @@ const addStudentToGroup = (studentId, groupId) => {
     const arrayOfGroups = loggedStudentsObject.grupos;
     const studentToAdd = arrayOfStudents.find(s => s.id === studentId);
     const groupToAddStudent = arrayOfGroups.find(g => g.groupId === groupId);
-    if (!groupToAddStudent.alumnos.some(a => a.id === studentId)) {
+    if (groupToAddStudent.alumnos.some(a => a.id === studentId)) {
+        displaySectionFast(studentIncludedAlert);
+    } else if (arrayOfGroups.some(g => g.alumnos.some(s => s.id === studentId))) {
+        displaySectionFast(studentOtherGroupAlert);
+    } else {
         groupToAddStudent.alumnos.push(studentToAdd);
         localStorage.setItem('loggedStudents', JSON.stringify(loggedStudentsObject));
         displaySectionFast(studentAddedSection);
-    } else {
-        displaySectionFast(studentIncludedAlert);
-    }
-    // Correct this part
-    updateGroupGPA(groupId, getGroupGPA(groupId));
+        updateGroupGPA(groupId, getGroupGPA(groupId));
+    } 
 }
 
 const getGroupGPA = (theGroupId) => {
